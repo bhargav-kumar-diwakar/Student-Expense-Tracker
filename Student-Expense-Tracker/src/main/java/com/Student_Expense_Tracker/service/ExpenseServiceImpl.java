@@ -45,9 +45,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
-    public List<ExpenseDTO> getAllExpenses(){
+    public List<ExpenseDTO> getAllExpense() {
         List<Expense> expenses = expenseRepository.findAll();
-        return expenses.stream().map(this::convertToDTO).collect(Collectors.toList());
+        return expenses.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -88,8 +90,4 @@ public class ExpenseServiceImpl implements ExpenseService {
         List<Expense> expenses = expenseRepository.findByDateBetween(startDate,endDate);
         return expenses.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
-
-
-
-
 }

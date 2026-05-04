@@ -12,5 +12,5 @@ public interface ExpenseService {
     ExpenseDTO updateExpense(Long id,ExpenseDTO expenseDTO);
     void deleteExpense(Long id);
     List<ExpenseDTO> getExpensesByCategory(String category);
-    List<ExpenseDTO> getExpesesByDateRange(LocalDate startDate, LocalDate endDate);
+    List<ExpenseDTO> getExpensesByDateRange(LocalDate startDate, LocalDate endDate);
 }
