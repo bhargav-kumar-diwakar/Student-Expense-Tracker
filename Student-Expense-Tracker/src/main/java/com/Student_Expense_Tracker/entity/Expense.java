@@ -27,7 +27,7 @@ public class Expense {
     private Double amount;
 
     @Column(nullable = false)
-    private  String cateogry;
+    private  String category;
 
     @Column(nullable = false)
     private LocalDate date;
