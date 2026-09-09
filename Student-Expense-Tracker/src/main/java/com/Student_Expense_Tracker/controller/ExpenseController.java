@@ -1,5 +1,6 @@
 package com.Student_Expense_Tracker.controller;
 
+import com.Student_Expense_Tracker.entity.Expense;
 import com.Student_Expense_Tracker.dto.ExpenseDTO;
 import com.Student_Expense_Tracker.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
