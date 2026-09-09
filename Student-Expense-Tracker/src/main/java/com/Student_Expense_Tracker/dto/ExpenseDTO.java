@@ -14,7 +14,7 @@ public class ExpenseDTO {
     private Long id;
     private String title;
     private Double amount;
-    private String cateogry;
+    private String category;
     private LocalDate date;
     private String description;
 
