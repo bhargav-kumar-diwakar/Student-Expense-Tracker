@@ -21,7 +21,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         dto.setId(expense.getId());
         dto.setTitle(expense.getTitle());
         dto.setAmount(expense.getAmount());
-        dto.setCateogry(expense.getCategory());
+        dto.setCategory(expense.getCategory());
         dto.setDate(expense.getDate());
         dto.setDescription(expense.getDescription());
         return dto;
@@ -31,7 +31,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         Expense expense = new Expense();
         expense.setTitle(dto.getTitle());
         expense.setAmount(dto.getAmount());
-        expense.setCategory(dto.getCateogry());
+        expense.setCategory(dto.getCategory());
         expense.setDate(dto.getDate());
         expense.setDescription(dto.getDescription());
         return expense;
@@ -65,7 +65,7 @@ public class ExpenseServiceImpl implements ExpenseService {
                 orElseThrow(()-> new RuntimeException("Expense not found with id: "+id));
         existingExpense.setTitle(expenseDTO.getTitle());
         existingExpense.setAmount(expenseDTO.getAmount());
-        existingExpense.setCategory(expenseDTO.getCateogry());
+        existingExpense.setCategory(expenseDTO.getCategory());
         existingExpense.setDate(expenseDTO.getDate());
         existingExpense.setDescription(expenseDTO.getDescription());
         Expense updatedExpense = expenseRepository.save(existingExpense);
