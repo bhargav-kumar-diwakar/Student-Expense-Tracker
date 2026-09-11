@@ -2,11 +2,11 @@ package com.Student_Expense_Tracker.service;
 
 import com.Student_Expense_Tracker.dto.ExpenseDTO;
 import com.Student_Expense_Tracker.entity.Expense;
+import com.Student_Expense_Tracker.model.User;
 import com.Student_Expense_Tracker.repository.ExpenseRepository;
 import com.Student_Expense_Tracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
