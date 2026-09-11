@@ -3,7 +3,10 @@ package com.Student_Expense_Tracker.service;
 import com.Student_Expense_Tracker.dto.ExpenseDTO;
 import com.Student_Expense_Tracker.entity.Expense;
 import com.Student_Expense_Tracker.repository.ExpenseRepository;
+import com.Student_Expense_Tracker.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,6 +18,20 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Autowired
     private ExpenseRepository expenseRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private User getLoggedInUser(){
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(()->
+                        new RuntimeException("Logged in user not found")
+                );
+    }
 
     private ExpenseDTO convertToDTO(Expense expense){
         ExpenseDTO dto = new ExpenseDTO();
