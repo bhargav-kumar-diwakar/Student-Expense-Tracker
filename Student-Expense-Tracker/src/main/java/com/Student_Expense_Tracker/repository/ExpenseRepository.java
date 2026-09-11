@@ -1,8 +1,8 @@
 package com.Student_Expense_Tracker.repository;
 
+import com.Student_Expense_Tracker.model.User;
 import com.Student_Expense_Tracker.entity.Expense;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -22,5 +22,5 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     List<Expense> findByAmountGreaterThan(Double amount);
 
     //Find expense by id AND user - prevents user A accessing user B's expense
-    Optional<Expense> findByIdandUser(Long id, User user);
+    Optional<Expense> findByIdAndUser(Long id, User user);
 }
