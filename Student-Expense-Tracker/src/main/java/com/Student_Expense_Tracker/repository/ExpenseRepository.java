@@ -23,4 +23,16 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
 
     //Find expense by id AND user - prevents user A accessing user B's expense
     Optional<Expense> findByIdAndUser(Long id, User user);
+
+    //Get all expenses belonging to a specific user
+    List<Expense> findByUser(User user);
+
+    // Get expenses by category for a specific user
+    List<Expense> findByUserAndCategory(User user, String category);
+
+    // Get expenses by date range for a specific user
+    List<Expense> findByUserAndDateBetween(User user,
+                                           LocalDate startDate,
+                                           LocalDate endDate);
+
 }

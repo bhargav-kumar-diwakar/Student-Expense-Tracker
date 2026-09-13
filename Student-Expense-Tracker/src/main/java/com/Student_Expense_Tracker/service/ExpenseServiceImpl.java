@@ -44,26 +44,29 @@ public class ExpenseServiceImpl implements ExpenseService {
         return dto;
     }
 
-    private Expense convertToEntity(ExpenseDTO dto){
+    private Expense convertToEntity(ExpenseDTO dto,User user){
         Expense expense = new Expense();
         expense.setTitle(dto.getTitle());
         expense.setAmount(dto.getAmount());
         expense.setCategory(dto.getCategory());
         expense.setDate(dto.getDate());
         expense.setDescription(dto.getDescription());
+        expense.setUser(user);
         return expense;
     }
 
     @Override
     public ExpenseDTO createExpense(ExpenseDTO expenseDTO){
-        Expense expense  = convertToEntity(expenseDTO);
+        User loggedInUser = getLoggedInUser();
+        Expense expense  = convertToEntity(expenseDTO,loggedInUser);
         Expense savedExpense = expenseRepository.save(expense);
         return convertToDTO(savedExpense);
     }
 
     @Override
     public List<ExpenseDTO> getAllExpense() {
-        List<Expense> expenses = expenseRepository.findAll();
+        User loggedInUser = getLoggedInUser();
+        List<Expense> expenses = expenseRepository.findByUser(loggedInUser);
         return expenses.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
