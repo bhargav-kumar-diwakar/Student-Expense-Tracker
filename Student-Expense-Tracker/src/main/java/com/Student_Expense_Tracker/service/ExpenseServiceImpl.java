@@ -74,14 +74,16 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public ExpenseDTO getExpenseById(Long id){
-        Expense expense = expenseRepository.findById(id).
+        User loggedInUser = getLoggedInUser();
+        Expense expense = expenseRepository.findByIdAndUser(id,loggedInUser).
                 orElseThrow(()-> new RuntimeException("Expense not found with id: "+id));
         return convertToDTO(expense);
     }
 
     @Override
     public ExpenseDTO updateExpense(Long id,ExpenseDTO expenseDTO){
-        Expense existingExpense = expenseRepository.findById(id).
+        User loggedInUser = getLoggedInUser();
+        Expense existingExpense = expenseRepository.findByIdAndUser(id,loggedInUser).
                 orElseThrow(()-> new RuntimeException("Expense not found with id: "+id));
         existingExpense.setTitle(expenseDTO.getTitle());
         existingExpense.setAmount(expenseDTO.getAmount());
@@ -94,20 +96,23 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public void deleteExpense(Long id){
-        Expense expense = expenseRepository.findById(id)
+        User loggedInUser = getLoggedInUser();
+        Expense expense = expenseRepository.findByIdAndUser(id,getLoggedInUser())
                 .orElseThrow(()-> new RuntimeException("Expense not found with id: "+id));
         expenseRepository.delete(expense);
     }
 
     @Override
     public List<ExpenseDTO> getExpensesByCategory(String category){
-        List<Expense> expenses = expenseRepository.findByCategory(category);
+        User loggedInUser = getLoggedInUser();
+        List<Expense> expenses = expenseRepository.findByUserAndCategory(loggedInUser,category);
         return expenses.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 
     @Override
     public List<ExpenseDTO> getExpensesByDateRange(LocalDate startDate, LocalDate endDate){
-        List<Expense> expenses = expenseRepository.findByDateBetween(startDate,endDate);
+        User loggedInUser = getLoggedInUser();
+        List<Expense> expenses = expenseRepository.findByUserAndDateBetween(loggedInUser,startDate,endDate);
         return expenses.stream().map(this::convertToDTO).collect(Collectors.toList());
     }
 }

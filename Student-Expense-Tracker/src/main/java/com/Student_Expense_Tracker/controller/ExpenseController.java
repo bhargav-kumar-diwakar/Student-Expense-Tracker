@@ -3,6 +3,7 @@ package com.Student_Expense_Tracker.controller;
 import com.Student_Expense_Tracker.entity.Expense;
 import com.Student_Expense_Tracker.dto.ExpenseDTO;
 import com.Student_Expense_Tracker.service.ExpenseService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ExpenseController {
     private ExpenseService expenseService;
 
     @PostMapping
-    public ResponseEntity<ExpenseDTO> createExpense(@RequestBody ExpenseDTO expenseDTO){
+    public ResponseEntity<ExpenseDTO> createExpense(@Valid @RequestBody ExpenseDTO expenseDTO){
         ExpenseDTO created = expenseService.createExpense(expenseDTO);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
@@ -38,7 +39,7 @@ public class ExpenseController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ExpenseDTO> updateExpense(@PathVariable Long id
-    ,@RequestBody ExpenseDTO expenseDTO){
+    ,@Valid @RequestBody ExpenseDTO expenseDTO){
         ExpenseDTO updated = expenseService.updateExpense(id,expenseDTO);
         return ResponseEntity.ok(updated);
     }
